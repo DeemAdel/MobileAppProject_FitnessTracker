@@ -1,12 +1,13 @@
 package com.example.mobileappproject_fitnesstracker;
 import android.os.Bundle; import android.view.View;
-import android.widget.Button; import android.widget.EditText; import android.widget.Toast;
+import android.widget.Button; import android.widget.EditText; import android.widget.Toast;import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 public class GoalActivity extends AppCompatActivity {
     EditText exerciseGoal;
     EditText waterGoal;
     EditText calorieGoal;
-    Button saveButton, backButton;
+    Button saveButton;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class GoalActivity extends AppCompatActivity {
                             "Please enter all goals",
                             Toast.LENGTH_SHORT
                     ).show();
+
                 } else {
                     Toast.makeText(
                             GoalActivity.this,

@@ -45,10 +45,18 @@ public class ProgressActivity extends AppCompatActivity {
     }
 
     private void loadProgress() {
-        int workoutDone = 30,    workoutGoal = 30;
-        int waterDone = 1500,    waterGoal = 2000;
-        int caloriesDone = 1800, caloriesGoal = 1800;
+        DatabaseHelper db = new DatabaseHelper(this);
 
+        int workoutDone = db.getTodayWorkoutMinutes();
+        int workoutGoal = db.getWorkoutGoal();
+
+        int waterDone = db.getTodayWater();
+        int waterGoal = db.getWaterGoal();
+
+        int caloriesDone = db.getTodayCalories();
+        int caloriesGoal = db.getCalorieGoal();
+
+        db.close();
         int goalsReached = 0;
         if (showRow(workoutBar, workoutText, workoutPercent,
                 workoutDone, workoutGoal, "min") >= 100) goalsReached++;

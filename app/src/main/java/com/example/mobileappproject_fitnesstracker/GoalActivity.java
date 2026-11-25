@@ -6,7 +6,7 @@ public class GoalActivity extends AppCompatActivity {
     EditText exerciseGoal;
     EditText waterGoal;
     EditText calorieGoal;
-    Button saveButton;
+    Button saveButton, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class GoalActivity extends AppCompatActivity {
         waterGoal = findViewById(R.id.etWaterGoal);
         calorieGoal = findViewById(R.id.etCalorieGoal);
         saveButton = findViewById(R.id.btnSaveGoal);
+        backButton = findViewById(R.id.btnBack);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +40,12 @@ public class GoalActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
                 }
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

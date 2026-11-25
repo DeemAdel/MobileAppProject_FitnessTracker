@@ -91,6 +91,13 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#7030A0"/>
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Back"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 </LinearLayout>

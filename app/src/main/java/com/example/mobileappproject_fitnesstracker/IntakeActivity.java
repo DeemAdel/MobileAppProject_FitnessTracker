@@ -1,15 +1,20 @@
+
 package com.example.mobileappproject_fitnesstracker;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class IntakeActivity extends Activity {
 
     EditText etWater, etCalories;
     Button btnSaveIntake;
+    TextView btnBack;
+
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,20 +22,27 @@ public class IntakeActivity extends Activity {
 
         setContentView(R.layout.activity_intake);
 
+        // Connect to database
+        db = new DatabaseHelper(this);
+
+        // Connect XML elements
         etWater = findViewById(R.id.etWater);
         etCalories = findViewById(R.id.etCalories);
         btnSaveIntake = findViewById(R.id.btnSaveIntake);
+        btnBack = findViewById(R.id.btnBack);
 
+        // Back Button
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
+
+        // Save Intake Button
         btnSaveIntake.setOnClickListener(v -> {
 
-            String waterText =
-                    etWater.getText().toString().trim();
+            String waterText = etWater.getText().toString().trim();
+            String caloriesText = etCalories.getText().toString().trim();
 
-            String caloriesText =
-                    etCalories.getText().toString().trim();
-
-            if (waterText.isEmpty() ||
-                    caloriesText.isEmpty()) {
+            if (waterText.isEmpty() || caloriesText.isEmpty()) {
 
                 Toast.makeText(this,
                         "Please fill all fields",
@@ -49,11 +61,19 @@ public class IntakeActivity extends Activity {
                     return;
                 }
 
+                // Save data to SQLite
+                db.addIntake(water, calories);
+
                 Toast.makeText(this,
-                        "Intake entered successfully!",
+                        "Intake saved successfully!",
                         Toast.LENGTH_SHORT).show();
 
+                // Clear fields
+                etWater.setText("");
+                etCalories.setText("");
+
             } catch (NumberFormatException e) {
+
                 Toast.makeText(this,
                         "Please enter valid numbers",
                         Toast.LENGTH_SHORT).show();
